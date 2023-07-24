@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 
 public class BirlController : MonoBehaviour
@@ -31,16 +32,16 @@ public class BirlController : MonoBehaviour
             {
                 Debug.Log("bay");
                 StartFlying();
-            }
+                transform.rotation = Quaternion.Euler(0, 0, 25);
+        }
+
+        _FlyBird();
 
         if (isFlying == false)
         {
-        _DownBird();
-        _FaceUpDown();
+            _DownBird();
+            //_FaceUpDown();
         }
-        _FlyBird();
-    
-
     }
     
     void _DownBird() 
@@ -48,8 +49,12 @@ public class BirlController : MonoBehaviour
         Vector3 posdown = transform.position;
         posdown.y -= downBird * Time.deltaTime ;
         transform.position = posdown;
-      
+
+        float angel = 0;
+        angel = Mathf.Lerp(0, -30, -transform.position.y / 5);
+        transform.rotation = Quaternion.Euler(0, 0, angel);
     }
+    
     void _FlyBird() 
     {
         if (isFlying) // Nếu chim đang bay
@@ -70,7 +75,7 @@ public class BirlController : MonoBehaviour
         }
 
         //Vector3 pos = transform.position;
-        //pos.y += flyBird * Time.deltaTime;
+        //pos.y += flySpeed * Time.deltaTime;
         //transform.position = pos;
     }
     void StartFlying()
@@ -79,28 +84,31 @@ public class BirlController : MonoBehaviour
         {
             isFlying = true;
             targetY = transform.position.y + location ; // Đặt vị trí cần đến
+            
         }
         
     }
-    void _FaceUpDown()
-    {
-        if (transform.position.y > 0)
-        {
-            float angel = 0;
-            angel = Mathf.Lerp(0, 90, transform.position.y / 7);
-            transform.rotation = Quaternion.Euler(0, 0, angel);
 
-        }
-        else if (transform.position.y == 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (transform.position.y < 0)
-        {
-            float angel = 0;
-            angel = Mathf.Lerp(0, -45, -transform.position.y / 7);
-            transform.rotation = Quaternion.Euler(0, 0, angel);
-        }
-    }
+
+    //void _FaceUpDown()
+    //{
+    //    if (transform.position.y > 0)
+    //    {
+    //        float angel = 0;
+    //        angel = Mathf.Lerp(0, 45, transform.position.y);
+    //        transform.rotation = Quaternion.Euler(0, 0, angel);
+
+    //    }
+    //    else if (transform.position.y == 0)
+    //    {
+    //        transform.rotation = Quaternion.Euler(0, 0, 0);
+    //    }
+    //    else if (transform.position.y < 0)
+    //    {
+    //        float angel = 0;
+    //        angel = Mathf.Lerp(0, -45, -transform.position.y / 7);
+    //        transform.rotation = Quaternion.Euler(0, 0, angel);
+    //    }
+    //}
    
 }
