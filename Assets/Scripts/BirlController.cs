@@ -8,21 +8,14 @@ public class BirlController : MonoBehaviour
     [SerializeField]
     private float downBird;
     [SerializeField]
-    //private AudioClip flyclip;
-    //private AudioSource audioSource;
- 
-    bool isFlying = false; // Biến cờ kiểm tra xem chim đang bay hay không
+    bool isFlying = false; //kiểm tra xem chim đang bay hay không
     float targetY; // Vị trí y mục tiêu khi bay
     [SerializeField]
     private float flySpeed; // Tốc độ bay của chim
     [SerializeField]
     private float location; // vị trí cuối
-    GameObject obj;
     void Start()
     {
-        obj = gameObject;
-        //audioSource = obj.GetComponent<AudioSource>();
-        //audioSource.clip = flyclip;
     }
 
     // Update is called once per frame
@@ -33,14 +26,13 @@ public class BirlController : MonoBehaviour
                 Debug.Log("bay");
                 StartFlying();
                 transform.rotation = Quaternion.Euler(0, 0, 25);
-        }
+            }
 
         _FlyBird();
 
         if (isFlying == false)
         {
             _DownBird();
-            //_FaceUpDown();
         }
     }
     
@@ -73,10 +65,6 @@ public class BirlController : MonoBehaviour
                 isFlying = false;
             }
         }
-
-        //Vector3 pos = transform.position;
-        //pos.y += flySpeed * Time.deltaTime;
-        //transform.position = pos;
     }
     void StartFlying()
     {
